@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct _706012210011_Lie__Samuel_AFL3App: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+    @State private var modelData = ModelData()
+
+    // Mohon pakai Emulator karena previewnya buggy
+        var body: some Scene {
+            WindowGroup {
+                ContentView()
+                    .environment(modelData)
+            }
         }
     }
-}
