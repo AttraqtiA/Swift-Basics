@@ -17,6 +17,12 @@ struct ProfileHost: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
+                if editMode?.wrappedValue == .active {
+                    Button("Cancel", role: .cancel) {
+                        draftProfile = modelData.profile
+                        editMode?.animation().wrappedValue = .inactive
+                    }
+                }
                 Spacer()
                 EditButton() // built-in
             }
@@ -24,7 +30,13 @@ struct ProfileHost: View {
             if editMode?.wrappedValue == .inactive { // profile display read
                 ProfileSummary(profile: modelData.profile)
             } else { // edit mode active
-                Text("Profile Editor")
+                ProfileEditor(profile: $draftProfile)
+                    .onAppear {
+                        draftProfile = modelData.profile
+                    }
+                    .onDisappear { // Buat save hasil edit profilenya
+                        modelData.profile = draftProfile
+                    }
             }
         }
         .padding()

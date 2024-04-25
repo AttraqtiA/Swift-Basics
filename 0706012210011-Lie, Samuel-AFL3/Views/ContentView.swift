@@ -30,6 +30,10 @@ struct ContentView: View { // Main Display / Root View, like Route.kt (?)
                 .tag(Tab.list)
         }
     }
+    
+    // When you present a view modally, the destination view covers the source view and replaces the current navigation stack.
+    
+    // You present a view modally when you want to break out of your app’s normal flow.
 }
 #Preview {
     ContentView()

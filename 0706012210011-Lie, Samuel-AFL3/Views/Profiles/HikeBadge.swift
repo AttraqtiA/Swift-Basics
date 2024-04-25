@@ -20,6 +20,9 @@ struct HikeBadge: View {
                 .font(.caption)
                 .accessibilityLabel("Badge for \(name).")
         }
+        // Add an accessibility label whenever doing so would make the meaning of a user interface element clearer to more users.
+        
+        // Always test your app with VoiceOver on, and then add accessibility labels to your app’s views as necessary.
     }
 }
 

@@ -1,21 +1,23 @@
 //
 //  LandmarkList.swift
-//  0706012210011-Lie, Samuel-AFL3
+//  WatchLandmarks Watch App
 //
-//  Created by student on 18/04/24.
+//  Created by student on 25/04/24.
 //
 
 import SwiftUI
 
 struct LandmarkList: View {
-    @Environment(ModelData.self) var modelData // to use the Observable
-    @State private var showFavoritesOnly = false // initial/starting UI state in Swift, change to manually trigger filtered list
+    @Environment(ModelData.self) var modelData
+    @State private var showFavoritesOnly = false
+    
     
     var filteredLandmarks: [Landmark] {
         modelData.landmarks.filter { landmark in
             (!showFavoritesOnly || landmark.isFavorite)
         }
     }
+    
     
     var body: some View {
         NavigationSplitView {
@@ -24,27 +26,25 @@ struct LandmarkList: View {
                     Text("Favorites only")
                 }
                 
+                
                 ForEach(filteredLandmarks) { landmark in
-                    NavigationLink { // automatic link from SwiftUI
+                    NavigationLink {
                         LandmarkDetail(landmark: landmark)
                     } label: {
                         LandmarkRow(landmark: landmark)
                     }
                 }
             }
-            .animation(.default, value: filteredLandmarks) // Animation is clean, wish Android Studio has this built-in
-            
+            .animation(.default, value: filteredLandmarks)
             .navigationTitle("Landmarks")
-            // Mac
-            .frame(minWidth: 300)
-
         } detail: {
-            Text("Select a Landmark") // in iPad view would be the show up as a default if no Landmark is selected
+            Text("Select a Landmark")
         }
     }
 }
 
-#Preview { // Don't forget environment for observable
+
+#Preview {
     LandmarkList()
         .environment(ModelData())
 }
