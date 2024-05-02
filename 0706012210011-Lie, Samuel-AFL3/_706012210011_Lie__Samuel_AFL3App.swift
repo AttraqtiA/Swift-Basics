@@ -18,8 +18,21 @@ struct _706012210011_Lie__Samuel_AFL3App: App {
                 .environment(modelData)
         }
         
+        // Conditions for each device
+        #if !os(watchOS)
+        .commands {
+            LandmarkCommands()
+        }
+        #endif
+        
         #if os(watchOS)
         WKNotificationScene(controller: NotificationController.self, category: "LandmarkNear")
+        #endif
+        
+        #if os(macOS)
+        Settings {
+            LandmarkSettings()
+        }
         #endif
     }
 }
